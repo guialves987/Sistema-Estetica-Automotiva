@@ -113,6 +113,12 @@ Sistema-Estetica-Automotiva
 └── frontend
 ```
 
+### Banco de Dados
+
+O projeto utiliza SQLite para desenvolvimento local.
+
+O banco de dados não é versionado no repositório e será criado localmente através das migrações do Alembic.
+
 ## Como Executar
 
 ### 1. Clonar o repositório
