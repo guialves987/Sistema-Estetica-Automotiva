@@ -1,0 +1,88 @@
+# Ambiente virtual
+
+venv/
+.venv/
+env/
+
+# Python
+
+**pycache**/
+*.py[cod]
+*$py.class
+
+# Compilações
+
+build/
+dist/
+*.egg-info/
+
+# Logs
+
+*.log
+
+# Arquivos SQLite
+
+*.db
+*.sqlite3
+
+# Arquivos de ambiente
+
+.env
+
+# Pytest
+
+.pytest_cache/
+.coverage
+htmlcov/
+
+# VS Code
+
+.vscode/
+
+# JetBrains
+
+.idea/
+
+# Sistema Operacional
+
+.DS_Store
+Thumbs.db
+
+# Alembic
+
+alembic/versions/**pycache**/
+
+# Arquivos temporários
+
+*.tmp
+*.temp
+
+# Mypy
+
+.mypy_cache/
+
+# Ruff
+
+.ruff_cache/
+
+# Cache Python
+
+.cache/
+
+# Arquivos gerados pelo pytest
+
+.pytest_cache/
+
+# Coverage
+
+.coverage.*
+coverage.xml
+
+# Arquivos de backup
+
+*.bak
+*.old
+
+# Arquivos locais do Windows
+
+desktop.ini
