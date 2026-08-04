@@ -1,3 +1,10 @@
+"""
+Modelo responsável por representar os veículos cadastrados
+no sistema.
+
+Todo veículo deve estar associado a um cliente.
+"""
+
 from sqlalchemy import (
     Integer,
     String,
@@ -8,6 +15,10 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.database.base import Base
 
 class Veiculo(Base):
+    """
+    Entidade que representa um veículo pertencente a um cliente.
+    """
+
     __tablename__ = "veiculos"
     
     id: Mapped[int] = mapped_column(
@@ -16,12 +27,14 @@ class Veiculo(Base):
             index=True
         )
 
+    # Referência ao proprietário do veículo
     cliente_id: Mapped[int] = mapped_column(
         Integer,
         ForeignKey("clientes.id"),
         nullable=False
     )
 
+    # Placa única utilizada para identificar o veículo
     placa: Mapped[str] = mapped_column(
         String(10),
         unique=True,
@@ -54,6 +67,7 @@ class Veiculo(Base):
         nullable=True
     )
 
+    # Relacionamento N:1 com cliente
     cliente = relationship(
         "Cliente",
         back_populates="veiculos"

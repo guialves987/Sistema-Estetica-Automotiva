@@ -1,3 +1,10 @@
+"""
+Rotas relacionadas aos clientes.
+
+Responsáveis por receber as requisições HTTP
+e encaminhá-las para a camada de serviços.
+"""
+
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
@@ -19,8 +26,7 @@ from app.services.cliente_service import (
 
 from typing import Optional
 
-
-
+# Agrupa todos os endpoints relacionados a clientes
 router = APIRouter(
     prefix="/clientes",
     tags=["Clientes"]
