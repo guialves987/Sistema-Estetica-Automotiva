@@ -14,7 +14,8 @@ from app.models.cliente import Cliente
 from app.models.veiculo import Veiculo
 
 from app.schemas.veiculo import(
-    VeiculoCreate
+    VeiculoCreate,
+    VeiculoUpdate
 )
 
 def obter_veiculo_ou_404(
@@ -126,5 +127,57 @@ def buscar_veiculo_por_id(
         db,
         veiculo_id
     )
+
+    return veiculo
+
+def atualizar_veiculo(
+        db: Session,
+        veiculo_id: int,
+        dados: VeiculoUpdate
+):
+    veiculo = obter_veiculo_ou_404(
+        db,
+        veiculo_id
+    )
+
+    cliente = (
+        db.query(Cliente)
+        .filter(
+            Cliente.id == dados.cliente_id
+        )
+        .first()
+    )
+
+    if not cliente:
+        raise HTTPException(
+            status_code=404,
+            detail="Cliente não encontrado"
+        )
+
+    placa_existente = (
+        db.query(Veiculo)
+        .filter(
+            Veiculo.placa == dados.placa,
+            Veiculo.id != veiculo_id
+        )
+        .first()
+    )
+
+    if placa_existente:
+        raise HTTPException(
+            status_code=409,
+            detail="Essa placa não pode ser usada porque já existe"
+        )
+
+    veiculo.cliente_id = dados.cliente_id
+    veiculo.placa = dados.placa
+    veiculo.marca = dados.marca
+    veiculo.modelo = dados.modelo
+    veiculo.ano = dados.ano
+    veiculo.cor = dados.cor
+    veiculo.observacoes = dados.observacoes
+
+    db.commit()
+    db.refresh(veiculo)
 
     return veiculo

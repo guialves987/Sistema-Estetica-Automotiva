@@ -12,13 +12,15 @@ from app.database.connection import get_db
 
 from app.schemas.veiculo import(
     VeiculoCreate,
-    VeiculoResponse
+    VeiculoResponse,
+    VeiculoUpdate
 )   
 
 from app.services.veiculo_service import (
     criar_veiculo,
     listar_veiculos,
-    buscar_veiculo_por_id
+    buscar_veiculo_por_id,
+    atualizar_veiculo
 )
 
 # Agrupa todos os endpoints relacionados a veículos
@@ -60,4 +62,19 @@ def buscar_veiculo(
     return buscar_veiculo_por_id(
         db,
         veiculo_id
+    )
+
+@router.put(
+    "/{veiculo_id}",
+    response_model=VeiculoResponse
+)
+def atualizar_veiculo_endpoint(
+    veiculo_id: int,
+    dados: VeiculoUpdate,
+    db: Session = Depends(get_db)
+):
+    return atualizar_veiculo(
+        db,
+        veiculo_id,
+        dados
     )
