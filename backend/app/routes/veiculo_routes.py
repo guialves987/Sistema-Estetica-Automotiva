@@ -20,7 +20,8 @@ from app.services.veiculo_service import (
     criar_veiculo,
     listar_veiculos,
     buscar_veiculo_por_id,
-    atualizar_veiculo
+    atualizar_veiculo,
+    deletar_veiculo
 )
 
 # Agrupa todos os endpoints relacionados a veículos
@@ -77,4 +78,17 @@ def atualizar_veiculo_endpoint(
         db,
         veiculo_id,
         dados
+    )
+
+@router.delete(
+    "/{veiculo_id}",
+    status_code=204
+)
+def deletar_veiculo_endpoint(
+    veiculo_id: int,
+    db: Session = Depends (get_db)
+):
+    deletar_veiculo(
+        db,
+        veiculo_id
     )

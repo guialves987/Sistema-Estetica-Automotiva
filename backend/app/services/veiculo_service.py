@@ -135,6 +135,13 @@ def atualizar_veiculo(
         veiculo_id: int,
         dados: VeiculoUpdate
 ):
+    """
+    Função para atualizar veículos existentes,
+    com regras para casos como:
+    - Veículo inexistente
+    - Cliente inexistente
+    - Placa duplicada
+    """
     veiculo = obter_veiculo_ou_404(
         db,
         veiculo_id
@@ -181,3 +188,18 @@ def atualizar_veiculo(
     db.refresh(veiculo)
 
     return veiculo
+
+def deletar_veiculo (
+        db: Session,
+        veiculo_id: int
+):
+    """
+    Função deletar veículo
+    """
+    veiculo = obter_veiculo_ou_404(
+        db,
+        veiculo_id
+    )
+
+    db.delete(veiculo)
+    db.commit()
